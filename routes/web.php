@@ -1,0 +1,38 @@
+<?php
+
+use App\Http\Controllers\EmployeeController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/coba', function () {
+    try {
+        DB::connection()->getPdo();
+        echo "tes";
+    } catch (\Exception $e) {
+        die("Could not connect to the database.  Please check your configuration. error:" . $e );
+    }
+});
+
+Route::get('home', function () {
+    return view('main');
+});
+
+Route::prefix('employee')->group( function () {
+    Route::get('employee', [EmployeeController::class,'index']);
+    Route::get('getEmployee', [EmployeeController::class, 'getEmployee']);
+});

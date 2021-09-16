@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Employee extends Model
+{
+    use HasFactory;
+    protected $table = 'EmployeeInformation';
+
+    public function HistoryAttendance()
+    {
+        return $this->belongsTo("App\Models\HistoryAttendance");
+    }
+}
