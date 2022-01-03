@@ -1,4 +1,3 @@
-
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -25,99 +24,41 @@
         <link rel="stylesheet" href="{{ asset('style/assets/scss/style.css') }}">
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
         <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-
+        <style>
+            /* @media only screen and (max-width: 600px) {
+                .open {
+                    overflow: hidden;
+                }
+            } */
+        </style>
 </head>
-<body>
+<body class="{{ Agent::isDesktop() ? 'open' : '' }}">
         <!-- Left Panel -->
 
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
 
             <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                <button id="navbar-toggle" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><img src="{{ asset('style/images/logo.png') }}" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="{{ asset('style/images/logo2.png') }}" alt="Logo"></a>
+                <div class="d-block">
+                    <a class="navbar-brand" href="#">Absensi</a>
+                    <a class="navbar-brand hidden" href="#">A</a>
+                </div>
+                <span id="version" class="text-muted small d-none">v 1.0 | 17-09-2021</span>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="{{ url('employee/employee') }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                        <a href="{{ url('employee/chart') }}"> <i class="menu-icon fa fa-dashboard"></i>Chart </a>
                     </li>
-                    {{-- <li>
-                        <a href="{{ url('edulevels/edulevels') }}"> <i class="menu-icon fa fa-dashboard"></i>Jenjang </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('programs/programs') }}"> <i class="menu-icon fa fa-dashboard"></i>Program </a>
-                    </li>
-                    <li>
-                        <p><i class="menu-icon"></i>Data Provinsi</p>
-                    </li>
-                    <li>
-                        <a href="{{ url('provinsi/provinsi') }}"> <i class="menu-icon fa fa-laptop"></i>Data Provinsi</a>
-                    </li> --}}
-                    {{-- <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Jawa</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('jakarta/prov_jakarta') }}">DKI Jakarta</a></li>
-                        </ul>
-                    </li> --}}
-                    {{-- <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Sumatra</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('aceh/prov_aceh') }}">Nangroe Aceh Darusalam</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="{{ url('sumatrautara/prov_sumatrautara') }}">Sumatra Utara</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="{{ url('sumatrabarat/prov_sumatrabarat') }}">Sumatra Barat</a></li>
-                            <li><i class="fa fa-bars"></i><a href="{{ url('sumatraselatan/prov_sumatraselatan') }}">Sumatra Selatan</a></li>
-                            <li><i class="fa fa-share-square-o"></i><a href="{{ url('bangkabelitung/prov_bangkabelitung') }}">Kepulauan Bangka Belitung</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="{{ url('jambi/prov_jambi') }}">Jambi</a></li>
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="#">Bengkulu</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="#">Riau</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="#">Kepulauan Riau</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="#">Lampung</a></li>
-                        </ul>
-                    </li> --}}
-                    {{-- <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Kalimantan</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="#">Kalimantan Barat</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="#">Kalimantan Selatan</a></li>
-                            <li><i class="fa fa-bars"></i><a href="#">Kalimantan Timur</a></li>
-                            <li><i class="fa fa-share-square-o"></i><a href="#">Kalimantan Tengah</a></li>
-                        </ul>
-                    </li> --}}
-                    {{-- <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Sulawesi</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="#">Sulawesi Barat</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="#">Sulawesi Tengah</a></li>
-                            <li><i class="fa fa-bars"></i><a href="#">Sulawesi Selatan</a></li>
-                            <li><i class="fa fa-share-square-o"></i><a href="#">Sulawesi tenggara</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="#">Sulawesi Utara</a></li>
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="#">Gorontalo</a></li>
-                        </ul>
-                    </li> --}}
-                    {{-- <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>WIL. Kepulauan</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-puzzle-piece"></i><a href="#">Bali</a></li>
-                            <li><i class="fa fa-id-badge"></i><a href="#">Nusa Tenggara Barat</a></li>
-                            <li><i class="fa fa-bars"></i><a href="#">Nusa Tenggara Timur</a></li>
-                            <li><i class="fa fa-share-square-o"></i><a href="#">Maluku</a></li>
-                            <li><i class="fa fa-id-card-o"></i><a href="#">Maluku Utara</a></li>
-                            <li><i class="fa fa-exclamation-triangle"></i><a href="#">Papua</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="#">Papua Barat</a></li>
-                        </ul>
-                    </li> --}}
-                    {{-- <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Data User</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-id-badge"></i><a href="#">Data Admin</a></li>
-                            <li><i class="fa fa-puzzle-piece"></i><a href="{{ url('data-penduduk/penduduk') }}">Data Penduduk</a></li>
-                        </ul>
-                    </li> --}}
+                    @if (Crypt::decrypt(session('login')) === 'admin')
+                        <li>
+                            <a href="{{ url('employee/employee') }}"> <i class="menu-icon fa fa-list"></i>List Employee </a>
+                        </li>
+                    @endif
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -136,116 +77,26 @@
 
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
-                    <div class="header-left">
-                        {{--  <button class="search-trigger"><i class="fa fa-search"></i></button>
-                        <div class="form-inline">
-                            <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                            </form>
-                        </div>  --}}
-
-                        {{--  <div class="dropdown for-notification">
-                          <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bell"></i>
-                            <span class="count bg-danger">5</span>
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="notification">
-                            <p class="red">You have 3 Notification</p>
-                            <a class="dropdown-item media bg-flat-color-1" href="#">
-                                <i class="fa fa-check"></i>
-                                <p>Server #1 overloaded.</p>
-                            </a>
-                            <a class="dropdown-item media bg-flat-color-4" href="#">
-                                <i class="fa fa-info"></i>
-                                <p>Server #2 overloaded.</p>
-                            </a>
-                            <a class="dropdown-item media bg-flat-color-5" href="#">
-                                <i class="fa fa-warning"></i>
-                                <p>Server #3 overloaded.</p>
-                            </a>
-                          </div>
-                        </div>  --}}
-
-                        {{--  <div class="dropdown for-message">
-                          <button class="btn btn-secondary dropdown-toggle" type="button"
-                                id="message"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="ti-email"></i>
-                            <span class="count bg-primary">9</span>
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="message">
-                            <p class="red">You have 4 Mails</p>
-                            <a class="dropdown-item media bg-flat-color-1" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/1.jpg"></span>
-                                <span class="message media-body">
-                                    <span class="name float-left">Jonathan Smith</span>
-                                    <span class="time float-right">Just now</span>
-                                        <p>Hello, this is an example msg</p>
-                                </span>
-                            </a>
-                            <a class="dropdown-item media bg-flat-color-4" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/2.jpg"></span>
-                                <span class="message media-body">
-                                    <span class="name float-left">Jack Sanders</span>
-                                    <span class="time float-right">5 minutes ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                </span>
-                            </a>
-                            <a class="dropdown-item media bg-flat-color-5" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/3.jpg"></span>
-                                <span class="message media-body">
-                                    <span class="name float-left">Cheryl Wheeler</span>
-                                    <span class="time float-right">10 minutes ago</span>
-                                        <p>Hello, this is an example msg</p>
-                                </span>
-                            </a>
-                            <a class="dropdown-item media bg-flat-color-3" href="#">
-                                <span class="photo media-left"><img alt="avatar" src="images/avatar/4.jpg"></span>
-                                <span class="message media-body">
-                                    <span class="name float-left">Rachel Santos</span>
-                                    <span class="time float-right">15 minutes ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                </span>
-                            </a>
-                          </div>
-                        </div>  --}}
-                    </div>
                 </div>
 
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="{{ asset('style/images/admin.jpg') }}" alt="User Avatar">
+                            <img class="img-thumbnail rounded-circle" src="{{ 'https://ui-avatars.com/api/?name='.Crypt::decrypt(session('login')) }}" style="width: 50px;">
                         </a>
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
                             <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-                            <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                            {{--  <a class="nav-link" href="#" on><i class="fa fa-power -off"></i>Logout</a>  --}}
+                            <button class="btn btn-block text-danger" type="submit" form="logout">
+                                <i class="fa fa-power-off"></i> Logout
+                            </button>
+                            <form id="logout" action="{{ url('employee/logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </div>
-
-                    {{--  <div class="language-select dropdown" id="language-select">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"  id="language" aria-haspopup="true" aria-expanded="true">
-                            <i class="flag-icon flag-icon-us"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="language" >
-                            <div class="dropdown-item">
-                                <span class="flag-icon flag-icon-fr"></span>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-es"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-us"></i>
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="flag-icon flag-icon-it"></i>
-                            </div>
-                        </div>
-                    </div>  --}}
-
                 </div>
             </div>
 
@@ -253,27 +104,6 @@
         <!-- Header-->
 
         @yield('breadcrumbs')
-        {{-- <div class="breadcrumbs">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Dashboard</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Table</a></li>
-                            <li class="active">Basic table</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
         @yield('content')
         <div class="content mt-3">
             <div class="animated fadeIn">
@@ -282,18 +112,33 @@
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
-
-
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
 
     @yield('js')
-    {{-- <script src="{{ asset('style/assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ asset('style/assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('style/assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('style/assets/js/main.js') }}"></script> --}}
+    <script src="{{ asset('style/assets/js/main.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '#menuToggle', function () {
+                $('#version').toggleClass('d-none');
+            });
+        });
 
+        function myFunction(x) {
+            if (x.matches) { // If media query matches
+                $('body').on('click', function () {
+                    $('body').removeClass('open');
+                })
+            }
+        }
 
+        var x = window.matchMedia("(max-width: 500px)");
+        myFunction(x);
+        x.addListener(myFunction);
+    </script>
 </body>
 </html>

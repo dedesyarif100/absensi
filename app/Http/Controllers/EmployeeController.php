@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
@@ -57,5 +58,25 @@ class EmployeeController extends Controller
         // dd(DB::select("SELECT * FROM dbo.vwMonsterHistoryAttendance WHERE TimeIn >= '09:00:00'"));
         // dd($employee);
         return $employee;
+    }
+
+    public function chart(Request $request)
+    {
+        // dd(session('login'));
+        return view('employee.chart');
+    }
+
+    public function getChartEmployee(Request $request)
+    {
+        // dd($request);
+        $result = [];
+        $employee = DB::select("SELECT EmployeeName, SUM(Seconds) as second FROM dbo.vwMonsterHistoryAttendance WHERE AuthenDate BETWEEN ? AND ? GROUP BY EmployeeName", [$request->awal, $request->akhir]);
+        foreach ($employee as $value) {
+            array_push($result, [
+                'name' => $value->EmployeeName,
+                'hour' => $value->second / 3600,
+            ]);
+        }
+        return $result;
     }
 }
