@@ -9,21 +9,19 @@ class LoginController extends Controller
 {
     public function Login(Request $request)
     {
-        // session_start(); /* Starts the session */
-        /* Check Login form submitted */
         $logins = [
             'admin' => '123456',
             'viewer' => '123456',
         ];
 
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<< VALIDASI USERNAME & PASSWORD >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> //
         if (in_array($request->username, array_keys($logins))) {
-            // dd($logins[$request->username]);
             if ($request->password === $logins[$request->username]) {
-                // dd(Crypt::encrypt($request->username));
                 session()->put('login', Crypt::encrypt($request->username));
                 return redirect('home');
             }
         }
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<< VALIDASI USERNAME & PASSWORD >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> //
 
         return redirect('employee/login');
     }

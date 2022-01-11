@@ -1,144 +1,119 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sufee Admin - HTML5 Admin Template</title>
-    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Absensi Monstergroup</title>
+    <link rel="stylesheet" href="{{ asset('style/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/assets/css/style.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.1.5/css/dx.common.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.1.5/css/dx.light.css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <style>
+        .page-wrapper {
+            height: 720px;
+        }
 
+        /* <<<<<<<<<<<<<<<<<<<< MEDIA QUERY INI, UNTUK MENGATUR TINGGI AREA CHART APLIKASI DIAKSES MENGGUNAKAN MOBILE APPS >>>>>>>>>>>>>>>>>>>>>>>> */
+        @media only screen and (min-width: 320px) and (max-width: 713px) {
+            .page-wrapper {
+                height: 860px;
+            }
+        }
+        @media only screen and (min-width: 714px) and (max-width: 914px) {
+            .page-wrapper {
+                height: 750px;
+            }
+        }
+        /* <<<<<<<<<<<<<<<<<<<< MEDIA QUERY INI, UNTUK MENGATUR TINGGI AREA CHART APLIKASI DIAKSES MENGGUNAKAN MOBILE APPS >>>>>>>>>>>>>>>>>>>>>>>> */
+    </style>
     @yield('css')
-        <link rel="apple-touch-icon" href="{{ asset('style/apple-icon.png') }}">
-        <link rel="shortcut icon" href="{{ asset('style/favicon.ico') }}">
-        <link rel="stylesheet" href="{{ asset('style/assets/css/normalize.css') }}">
-        <link rel="stylesheet" href="{{ asset('style/assets/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('style/assets/css/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('style/assets/css/themify-icons.css') }}">
-        <link rel="stylesheet" href="{{ asset('style/assets/css/flag-icon.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('style/assets/css/cs-skin-elastic.css') }}">
-        <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
-        <link rel="stylesheet" href="{{ asset('style/assets/scss/style.css') }}">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-        <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-        <style>
-            /* @media only screen and (max-width: 600px) {
-                .open {
-                    overflow: hidden;
-                }
-            } */
-        </style>
 </head>
-<body class="{{ Agent::isDesktop() ? 'open' : '' }}">
-        <!-- Left Panel -->
-
-    <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-
-            <div class="navbar-header">
-                <button id="navbar-toggle" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <div class="d-block">
-                    <a class="navbar-brand" href="#">Absensi</a>
-                    <a class="navbar-brand hidden" href="#">A</a>
+<body>
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin5">
+                    {{-- LOGO MONSTER GROUP DI BAGIAN SIDEBAR POJOK KIRI ATAS --}}
+                    <div class="navbar-brand">
+                        <span class="logo-text ms-2">
+                            <img src="{{ asset('style/assets/images/logo/monster-group.png') }}" width="90%" alt="homepage" class="light-logo" />
+                        </span>
+                    </div>
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                 </div>
-                <span id="version" class="text-muted small d-none">v 1.0 | 17-09-2021</span>
-            </div>
-
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="{{ url('employee/chart') }}"> <i class="menu-icon fa fa-dashboard"></i>Chart </a>
-                    </li>
-                    @if (Crypt::decrypt(session('login')) === 'admin')
-                        <li>
-                            <a href="{{ url('employee/employee') }}"> <i class="menu-icon fa fa-list"></i>List Employee </a>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    {{-- COLLAPSE FUNGSI SHOW HIDDEN SIDEBAR --}}
+                    <ul class="navbar-nav float-start me-auto">
+                        <li class="nav-item d-lg-block">
+                            <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="fas fa-bars"></i></a>
                         </li>
-                    @endif
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel -->
-
-    <!-- Left Panel -->
-
-    <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-
-        <!-- Header-->
-        <header id="header" class="header">
-
-            <div class="header-menu">
-
-                <div class="col-sm-7">
-                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    </ul>
+                    <ul class="navbar-nav float-end">
+                        <li class="nav-item dropdown">
+                            {{-- INISIAL USER YANG LOGIN SAAT INI --}}
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="img-thumbnail rounded-circle" src="{{ 'https://ui-avatars.com/api/?name='.Crypt::decrypt(session('login')) }}" style="width: 50px;">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-divider"></div>
+                                {{-- FUNGSI LOGOUT --}}
+                                <button class="btn btn-danger btn-block" type="submit" form="exit">
+                                    <i class="fa fa-power-off"></i> Logout
+                                </button>
+                                <form id="exit" action="{{ url('employee/logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
+            </nav>
+        </header>
 
-                <div class="col-sm-5">
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="img-thumbnail rounded-circle" src="{{ 'https://ui-avatars.com/api/?name='.Crypt::decrypt(session('login')) }}" style="width: 50px;">
-                        </a>
-                        <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-                            {{--  <a class="nav-link" href="#" on><i class="fa fa-power -off"></i>Logout</a>  --}}
-                            <button class="btn btn-block text-danger" type="submit" form="logout">
-                                <i class="fa fa-power-off"></i> Logout
-                            </button>
-                            <form id="logout" action="{{ url('employee/logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+        {{-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< LIST MENU DI SIDEBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> --}}
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="pt-4">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('employee/chart') }}" aria-expanded="false"><i class="far fa-chart-bar"></i><span class="hide-menu">Chart</span></a>
+                        </li>
+                        @if (Crypt::decrypt(session('login')) === 'admin')
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('employee/employee') }}" aria-expanded="false"><i class="far fa-list-alt"></i><span class="hide-menu">List Employee</span></a>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        {{-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< LIST MENU DI SIDEBAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> --}}
+
+        {{-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CONTENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> --}}
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                @yield('breadcrumbs')
+                @yield('content')
+                <div class="content mt-3">
+                    <div class="animated fadeIn">
+                        <div class="row">
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        {{-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< CONTENT >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> --}}
+    </div>
 
-        </header><!-- /header -->
-        <!-- Header-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn3.devexpress.com/jslib/21.1.5/js/dx.all.js"></script>
 
-        @yield('breadcrumbs')
-        @yield('content')
-        <div class="content mt-3">
-            <div class="animated fadeIn">
-                <div class="row">
-
-                </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->
-    </div><!-- /#right-panel -->
-
-    <!-- Right Panel -->
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('style/assets/js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('style/assets/js/custom.min.js') }}"></script>
+    <script src="{{ asset('style/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script src="{{ asset('style/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     @yield('js')
-    <script src="{{ asset('style/assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
-    <script src="{{ asset('style/assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('style/assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('style/assets/js/main.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            $('body').on('click', '#menuToggle', function () {
-                $('#version').toggleClass('d-none');
-            });
-        });
-
-        function myFunction(x) {
-            if (x.matches) { // If media query matches
-                $('body').on('click', function () {
-                    $('body').removeClass('open');
-                })
-            }
-        }
-
-        var x = window.matchMedia("(max-width: 500px)");
-        myFunction(x);
-        x.addListener(myFunction);
-    </script>
 </body>
 </html>

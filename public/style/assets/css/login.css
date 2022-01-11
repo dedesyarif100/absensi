@@ -8138,7 +8138,7 @@
     line-height: 1.8;
     font-weight: normal;
     /* background-color: #0088F2; */
-    background-image: url('../../images/backgroundlogin2.jpg');
+    background-image: url('../images/background/backgroundlogin2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     color: gray; }

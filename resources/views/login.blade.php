@@ -1,16 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-	<title>Login 09</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Absensi Monstergroup</title>
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{{ asset('style/assets/css/login.css') }}">
     <style>
-        .monstergroup {
-                /* background-color: white; */
-        }
         .monstergroup img {
             width: 100%;
         }
@@ -23,7 +18,7 @@
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap py-5">
                         <div class="monstergroup">
-                            <img src="{{ asset('style/images/monstergroup.png') }}" alt="">
+                            <img src="{{ asset('style/assets/images/logo/monster-group.png') }}" width="40px;" alt="">
                         </div>
 						<div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/bg.jpg);"></div>
 						<h3 class="text-center mb-0">History Attendence</h3>

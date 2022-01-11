@@ -1,10 +1,5 @@
 @extends('main')
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.1.5/css/dx.common.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.1.5/css/dx.light.css" />
-@endsection
-
 @section('title', 'Dashboard')
 
 @section('breadcrumbs')
@@ -22,25 +17,24 @@
     <div class="content mt-3">
         <div class="animated fadeIn">
             <div class="demo-container">
+                {{-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RANGE TANGGAL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> --}}
                 <div class="input-daterange">
                     <div class="row">
                         <div class="col-md-4">
                             <label for="awal">awal</label>
-                            <input type="date" class="form-control" name="awal" id="awal"
-                                value="{{ now()->subMonth()->day(21)->toDateString() }}">
+                            <input class="datepicker form-control" data-date-format="yyyy-mm-dd" name="awal" id="awal" value="{{ now()->subMonth()->day(21)->toDateString() }}">
                         </div>
                         <div class="col-md-4">
                             <label for="akhir">akhir</label>
-                            <input type="date" class="form-control" name="akhir" id="akhir"
-                                value="{{ now()->day(20)->toDateString() }}">
+                            <input class="datepicker form-control" data-date-format="yyyy-mm-dd" name="akhir" id="akhir" value="{{ now()->day(20)->toDateString() }}">
                         </div>
                         <div class="col-md-4">
-                            <button type="submit" name="filter" id="filter" class="btn btn-primary btn-sm"
-                                style="margin-top: 2.22rem; width: 120px;">Filter</button>
+                            <button type="submit" name="filter" id="filter" class="btn btn-primary btn-sm" style="margin-top: 2.22rem; width: 120px;">Filter</button>
                         </div>
                     </div>
                     <br>
                 </div>
+                {{-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< RANGE TANGGAL >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> --}}
             </div>
         </div>
     </div>
@@ -53,12 +47,13 @@
 @endsection
 
 @section('js')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn3.devexpress.com/jslib/21.1.5/js/dx.all.js"></script>
-
     <script>
         $(function() {
-            var x = window.matchMedia("(max-width: 700px)");    
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+            });
+
+            var x = window.matchMedia("(max-width: 700px)");
             let awal = $('#awal').val();
             let akhir = $('#akhir').val();
             let chartOption = {
@@ -86,13 +81,11 @@
                     argumentField: "name",
                     valueField: "hour",
                     name: "Absensi",
-                    // nameField: "name",
                     type: "bar",
                     color: '#ffaa66',
                 },
                 seriesTemplate: {
                     nameField: "name",
-                    // valueField: "hour",
                 },
             };
             myFunction(x);
